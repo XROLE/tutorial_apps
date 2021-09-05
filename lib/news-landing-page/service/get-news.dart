@@ -1,22 +1,27 @@
 import 'package:dio/dio.dart';
+import 'package:tutorial_apps/data/http_client.dart';
 import 'package:tutorial_apps/news-landing-page/news-page/model/news-article.dart';
 
 class GetNews {
-  var dio = new Dio();
+  var dio =  HttpClient.getClient();
 
   Future<List<Articles>> fetchTopHeadlines() async {
-    String url =
-        'https://newsapi.org/v2/everything?q=tesla&from=2021-07-30&sortBy=publishedAt&apiKey=0486108bebef437eb205c1a299a9d393';
+    String url = 'http://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1';
 
-    final response = await dio.get(url);
+    try {
+      final response = await dio.get(url);
+      if (response.statusCode == 200) {
+        final result = response.data;
 
-    if (response.statusCode == 200) {
-      final result = response.data;
+        print('Result ============> $response');
 
-      Iterable list = result['articles'];
-      return list.map((article) => Articles.fromJson(article)).toList();
-    } else {
-      throw Exception('Failed to fetch news');
+      } else {
+        print('Something went wrong =============================>');
+        throw Exception('Failed to fetch news');
+      }
+    } catch (e) {
+      print('There was an error ==============> $e');
     }
+    return [];
   }
 }
