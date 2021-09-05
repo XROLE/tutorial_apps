@@ -5,9 +5,11 @@ class HttpClient {
 
   static Dio getClient() {
     Dio dio = new Dio();
+
+      
     dio.options.connectTimeout = 6000;
     dio.options.receiveTimeout = 6000;
-    // dio.options.contentType = 'application/json';
+    dio.options.contentType = 'application/json';
 
     dio.interceptors.add(InterceptorsWrapper(
         onRequest: (RequestOptions options, RequestInterceptorHandler handler) async {
