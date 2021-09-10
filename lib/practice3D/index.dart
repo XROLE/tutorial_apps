@@ -20,7 +20,7 @@ class _PracticePageState extends State<PracticePage> {
         child: Container(
           height: MediaQuery.of(context).size.height * 0.5,
           width: double.infinity * 0.5,
-          color: Colors.black38,
+          color: Color.fromRGBO(31, 150, 230, 1),
           child: CustomPaint(
             painter: myPainter(),
             child: Text('Xrole'),
@@ -71,20 +71,31 @@ class myPainter extends CustomPainter {
 // THIS DRAWS STRAIGHT LINE FROM THE MIDDLE
     // canvas.drawLine(Offset(w / 2, 0), Offset(w / 2, h), paint);
 
-    final radius = Math.min(w, h) / 2;
-    final center = Offset(w / 2, h / 2);
+    // final radius = Math.min(w, h) / 2;
+    // final center = Offset(w / 2, h / 2);
 
-    final paint = Paint()..color = Colors.yellow;
-    Paint smileyPaint = Paint()
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 10;
-    final arcPaint = Paint()..style = PaintingStyle.stroke..strokeCap = StrokeCap.round..color = Colors.red..strokeWidth= 10;
-    final arc = Path()..moveTo(w * 0.2, h * 0.7)..arcToPoint(Offset(w * 0.8, h * 0.7), radius: Radius.circular(150));
+    // final paint = Paint()..color = Colors.yellow;
+    // Paint smileyPaint = Paint()
+    //   ..style = PaintingStyle.stroke
+    //   ..strokeWidth = 10;
+    // final arcPaint = Paint()..style = PaintingStyle.stroke..strokeCap = StrokeCap.round..color = Colors.red..strokeWidth= 10;
+    // final arc = Path()..moveTo(w * 0.2, h * 0.7)..arcToPoint(Offset(w * 0.8, h * 0.7), radius: Radius.circular(150));
 
-    canvas.drawCircle(center, radius, paint);
-    canvas.drawArc(
-        Rect.fromCircle(center: center, radius: radius / 2), 0, Math.pi / 2, false, smileyPaint);
-    canvas.drawPath(arc, arcPaint);
+    // canvas.drawCircle(center, radius, paint);
+    // canvas.drawArc(
+    //     Rect.fromCircle(center: center, radius: radius / 2), 0, Math.pi / 2, false, smileyPaint);
+    // canvas.drawPath(arc, arcPaint);
+
+    final cloudPaint = new Paint()..color = Colors.white..strokeCap = StrokeCap.round;
+
+    final cloudPath = new Path();
+    
+    cloudPath.moveTo(w / 2, h / 2 + 20);
+    cloudPath.quadraticBezierTo(w / 2 + 60, h / 2 - 80, w / 2 + 120, h / 2 + 20);
+    cloudPath.quadraticBezierTo(w / 2 + 240, h / 2 + 60, w / 2 + 120, h / 2 + 120);
+    cloudPath.lineTo(w / 2, h / 2 + 120);
+    cloudPath.quadraticBezierTo(w / 2 - 90, h / 2 + 60, w / 2, h / 2 + 20);
+    canvas.drawPath(cloudPath, cloudPaint);
   }
 
   @override
