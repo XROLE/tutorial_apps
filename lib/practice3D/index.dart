@@ -10,6 +10,7 @@ class PracticePage extends StatefulWidget {
 }
 
 class _PracticePageState extends State<PracticePage> {
+  final shaderOffsset = new Offset(0.3, 0.3);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,9 +22,16 @@ class _PracticePageState extends State<PracticePage> {
           height: MediaQuery.of(context).size.height * 0.5,
           width: double.infinity * 0.5,
           color: Color.fromRGBO(31, 150, 230, 1),
-          child: CustomPaint(
-            painter: myPainter(),
-            child: Text('Xrole'),
+          child: ShaderMask(
+            shaderCallback: (rect) {
+              return RadialGradient(
+                colors: [Color.fromRGBO(247, 247, 247, 1), Colors.grey.shade700],
+                center: Alignment(0.3, 0.3),
+              ).createShader(rect);
+            },
+            child: CustomPaint(
+              painter: myPainter(),
+            ),
           ),
         ),
       ),
@@ -86,15 +94,18 @@ class myPainter extends CustomPainter {
     //     Rect.fromCircle(center: center, radius: radius / 2), 0, Math.pi / 2, false, smileyPaint);
     // canvas.drawPath(arc, arcPaint);
 
-    final cloudPaint = new Paint()..color = Colors.white..strokeCap = StrokeCap.round;
+    final cloudPaint = new Paint()
+      ..color = Colors.white
+      ..strokeCap = StrokeCap.round;
 
     final cloudPath = new Path();
-    
+
     cloudPath.moveTo(w / 2, h / 2 + 20);
     cloudPath.quadraticBezierTo(w / 2 + 60, h / 2 - 80, w / 2 + 120, h / 2 + 20);
     cloudPath.quadraticBezierTo(w / 2 + 240, h / 2 + 60, w / 2 + 120, h / 2 + 120);
     cloudPath.lineTo(w / 2, h / 2 + 120);
     cloudPath.quadraticBezierTo(w / 2 - 90, h / 2 + 60, w / 2, h / 2 + 20);
+    cloudPath.close();
     canvas.drawPath(cloudPath, cloudPaint);
   }
 
