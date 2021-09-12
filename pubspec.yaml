@@ -52,6 +52,7 @@ flutter:
   assets:
     - assets/img/apple2.png
     - assets/img/chip.png
+    - assets/img/logo.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
